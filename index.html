@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Progress Bar Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 100px;
+      background-color: #f0f0f0;
+      transition: opacity 1s ease-out;
+    }
+
+    #progressContainer {
+      width: 80%;
+      background-color: #ddd;
+      margin: auto;
+      height: 30px;
+      border-radius: 5px;
+    }
+
+    #progressBar {
+      width: 0%;
+      height: 100%;
+      background-color: #4caf50;
+      text-align: center;
+      line-height: 30px;
+      color: white;
+      border-radius: 5px;
+      transition: width 0.2s ease;
+    }
+
+    .fade-out {
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Loading... Please wait</h2>
+  <div id="progressContainer">
+    <div id="progressBar">0%</div>
+  </div>
+
+  <script>
+    let width = 0;
+    const progressBar = document.getElementById("progressBar");
+
+    const interval = setInterval(() => {
+      if (width >= 100) {
+        clearInterval(interval);
+
+        // Fade out the page
+        document.body.classList.add("fade-out");
+
+        // Wait for the fade effect to complete before redirecting
+        setTimeout(() => {
+          window.location.href = "nextpage.html";
+        }, 1000); // 1s matches the CSS transition
+      } else {
+        width++;
+        progressBar.style.width = width + '%';
+        progressBar.innerText = width + '%';
+      }
+    }, 50); // Adjust speed (50ms for each 1%)
+  </script>
+
+</body>
+</html>
